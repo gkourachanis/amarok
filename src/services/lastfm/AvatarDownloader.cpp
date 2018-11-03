@@ -33,28 +33,10 @@ AvatarDownloader::~AvatarDownloader()
 void
 AvatarDownloader::downloadAvatar( const QString& username, const QUrl &url )
 {
-    if( !url.isValid() )
-        return;
-
-    m_userAvatarUrls.insert( url, username );
-    The::networkAccessManager()->getData( url, this,
-         SLOT(downloaded(QUrl,QByteArray,NetworkAccessManagerProxy::Error)) );
 }
 
 void
 AvatarDownloader::downloaded( const QUrl &url, QByteArray data, NetworkAccessManagerProxy::Error e )
 {
-    if( !m_userAvatarUrls.contains( url ) )
-        return;
-
-    const QString username = m_userAvatarUrls.take( url );
-    if( e.code == QNetworkReply::NoError )
-    {
-        QPixmap avatar;
-        if( avatar.loadFromData( data ) )
-            emit avatarDownloaded( username, avatar );
-    }
-    else
-        debug() << QString( "Error: failed to download %1'savatar: %2" ).arg( username, e.description );
 }
 

@@ -337,7 +337,6 @@ LastFmService::onGetUserInfo()
                     debug() << "profile avatar: " <<lfm["user"][ "image" ].text();
                     AvatarDownloader* downloader = new AvatarDownloader();
                     QUrl url( lfm["user"][ "image" ].text() );
-                    downloader->downloadAvatar( m_config->username(),  url);
                     connect( downloader, &AvatarDownloader::avatarDownloaded,
                              this, &LastFmService::onAvatarDownloaded );
                 }

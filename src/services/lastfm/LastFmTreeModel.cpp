@@ -324,7 +324,6 @@ LastFmTreeModel::avatar( const QString &username, const QUrl &avatarUrl ) const
      // insert placeholder so that we don't request the save avatar twice;
     const_cast<LastFmTreeModel *>( this )->m_avatars.insert( username, defaultIcon );
     AvatarDownloader* downloader = new AvatarDownloader();
-    downloader->downloadAvatar( username, avatarUrl );
     connect( downloader, &AvatarDownloader::avatarDownloaded,
              this, &LastFmTreeModel::onAvatarDownloaded );
     return defaultIcon;
